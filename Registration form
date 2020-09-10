@@ -1,0 +1,308 @@
+package colors;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.io.File;
+import java.util.*;
+
+import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.filechooser.FileSystemView;
+
+public class colorsSwing extends JFrame implements ActionListener
+{ 	
+	public int w=500;
+	public int h=400;
+	public static JProgressBar p;
+	public JPanel prog;
+	public JFileChooser n;
+	public JTextArea area;
+	public JCheckBox select_M;
+	public JCheckBox select_F;
+	public colorsSwing()
+	{
+		// TODO Auto-generated constructor stub
+		super();
+		setTitle("remember swing");
+		setSize(w,h);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		
+		JPanel bigPanel=new JPanel();
+		bigPanel.setLayout(new GridLayout(3,1));
+		
+		JPanel btnPanel=new JPanel();
+		btnPanel.setLayout(new GridLayout(3,2));
+		JButton bt1=new JButton("Toggle color");
+		bt1.addActionListener(this);
+		JButton bt2=new JButton("Disable Text Area");
+		bt2.addActionListener(this);
+		JButton submit=new JButton("SUBMIT");
+		submit.addActionListener(this);
+		JButton bt3=new JButton("Exit");
+		btnPanel.add(bt1);
+		btnPanel.add(bt2);
+		btnPanel.add(submit);
+		btnPanel.add(bt3);
+		bt3.addActionListener(this);
+		btnPanel.setBackground(Color.GREEN);
+		add(btnPanel,BorderLayout.SOUTH);
+			
+						
+		JPanel regPanel=new JPanel();
+		area=new JTextArea();
+		area.setBackground(Color.CYAN);
+		area.setText("hello there");
+		JPanel pan1=new JPanel();
+		//user label
+		JLabel user_L=new JLabel();
+		user_L.setText("NAME");
+		JTextField user_T= new JTextField();
+		
+		//pass label
+		JLabel pass_L=new JLabel();
+		pass_L.setText("Enter PassWord");
+		JPasswordField pass=new JPasswordField();
+		
+		//selections
+		JLabel id=new JLabel();
+		id.setText("Education Level");
+		JLabel male=new JLabel();
+		male.setText("Male");
+		select_M=new JCheckBox();
+		JLabel Female=new JLabel();
+		Female.setText("Female");
+		JCheckBox select_F=new JCheckBox();
+		
+		JLabel Masters=new JLabel();
+		Masters.setText("Masters");
+		JCheckBox select_Ms=new JCheckBox();
+		JLabel PhD=new JLabel();
+		PhD.setText("PhD");
+		JCheckBox select_P=new JCheckBox();
+		JLabel Bachelors=new JLabel();
+		Bachelors.setText("U/Bachelor");
+		JCheckBox select_UB=new JCheckBox();
+		JLabel GHC=new JLabel();
+		GHC.setText("Tick here");
+		  p=new JProgressBar();
+			p.setValue(0);
+			p.setStringPainted(true);
+		//submit
+		
+		pan1.add(user_L);
+		pan1.add(user_T);
+		pan1.add(pass_L);
+		pan1.add(pass);
+		pan1.add(male);
+		pan1.add(select_M);
+		pan1.add(Female);
+		pan1.add(select_F);
+		pan1.add(id);
+		pan1.add(GHC);
+		pan1.add(Masters);
+		pan1.add(select_Ms);
+		pan1.add(PhD);
+		pan1.add(select_P);
+		pan1.add(Bachelors);
+		pan1.add(select_UB);
+		pan1.add(p);
+				
+		pan1.setLayout(new GridLayout(10,5));
+		regPanel.add(pan1);
+		
+		regPanel.add(area);
+		regPanel.setLayout(new GridLayout(2,1));
+		add(regPanel,BorderLayout.CENTER);
+		
+		JMenuBar menu=new JMenuBar();
+		JMenu item1=new JMenu("File");
+		JMenu item2=new JMenu("New");
+		item1.addActionListener(this);
+		item1.add(item2);
+		JMenuItem i1=new JMenuItem("Registration form");
+		i1.addActionListener(this);
+		JMenuItem i2=new JMenuItem("Member details");
+		i2.addActionListener(this);
+		item2.addActionListener(this);
+		item2.add(i1);
+		item2.add(i2);
+		JMenuItem item3=new JMenuItem("Open");
+		JMenuItem item4=new JMenuItem("Close");
+		JMenuItem item5=new JMenuItem("Save");
+		item1.add(item2);
+		item3.addActionListener(this);
+		item1.add(item3);
+		item4.addActionListener(this);
+		item1.add(item4);
+		item5.addActionListener(this);
+		item1.add(item5);
+		JMenu item9=new JMenu("Source");
+		item9.addActionListener(this);
+		JMenuItem item6=new JMenuItem("Remove comment");
+		item6.addActionListener(this);
+		JMenuItem item7=new JMenuItem("Toggle text");
+		item7.addActionListener(this);
+		JMenuItem item8=new JMenuItem("Change font");
+		item8.addActionListener(this);
+		item9.add(item6);
+		item9.add(item7);
+		item9.add(item8);
+		JMenu item10=new JMenu("Contacts");
+		item10.addActionListener(this);
+		JMenu item0=new JMenu("Social platforms");
+		item0.addActionListener(this);
+		item10.add(item0);
+		JMenuItem item11=new JMenuItem("Facebook");
+		item11.addActionListener(this);
+		JMenuItem item12=new JMenuItem("Email");
+		item12.addActionListener(this);
+		JMenuItem item13=new JMenuItem("Whatsapp");
+		item13.addActionListener(this);
+		item0.add(item11);
+		item0.add(item12);
+		item0.add(item13);
+		
+		menu.add(item1);
+		menu.add(item9);
+		menu.add(item10);
+		add(menu,BorderLayout.NORTH);
+		
+		//adding progress button to button panel
+		prog=new JPanel();
+      
+		//prog.add(p);
+		fill();
+		btnPanel.add(prog);
+		
+		JButton save=new JButton();
+		save.setText("Save");
+		save.addActionListener(this);
+		prog.add(save);
+		prog.setLayout(new GridLayout(1,2));
+		bigPanel.setLayout(new GridLayout(5,1));
+		bigPanel.setBackground(Color.RED);
+}
+	private void fill()
+	{
+		// TODO Auto-generated method stub
+		int i=0;
+		try
+		{
+			while(i<=100){
+				//sets texts according to the level to which the bar is filled
+				if(i>30 && i<70)
+					p.setString("wait for sometime");
+				else if(i>70)
+					p.setString("almost finished Loading");
+				else
+					p.setString("loading started");
+				//fill menu
+				p.setValue(i+10);
+				Thread.sleep(3000);
+				i+=20;
+			}
+		}
+		catch(Exception e)
+		{
+			
+		}
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) 
+	{
+		int count=0;
+		String action=e.getActionCommand();
+		// TODO Auto-generated method stub
+		if(action.equals("Exit"))
+		{
+			System.exit(0);
+		}
+		if(action.equals("Save"))
+		{
+			fill();
+		}
+		if(action.equals("Toggle color")&& count==0)
+		{
+			area.setBackground(Color.BLACK);
+			count++;
+		}
+		else if(action.equals("Toggle color")&& count==1)
+		{
+			area.setBackground(Color.RED);
+			count=-1;
+		}
+		else if(action.equals("Toggle color")&& count==0)
+		{
+			area.setBackground(Color.CYAN);
+			count+=1;
+		}
+		if(action.equals("Disable Text Area")&& count==0)
+		{
+			area.setEditable(false);
+			count++;
+		}
+		else if(count==1)
+		{
+			area.setEditable(true);
+			count--;
+		}
+		if(action.equals("SUBMIT"))
+		{
+			JOptionPane.showMessageDialog(null, "details sumitted");
+		}
+		if (action.equals("Toggle text")) 
+		{
+			area.setText("hello");
+			Font my=new Font("SansSerif", Font.BOLD, 16);
+			area.setFont(my);
+		}
+		if( action.equals( "Facebook"))
+		{
+			area.setText("\n@Baraka Daniel");
+		}
+		else if(action.equals("Whatsapp"))
+		{
+			area.setText("+254752251530");
+		}
+		else if(action.equals("Email"))
+		{
+			area.setText("barakadaniel116@gmail.com");
+		}
+		if(action.equals("Remove comment"))
+		{
+			area.setText(null);
+		}
+		if(action.equals("Registration form"))
+		{
+			n=new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+			int r=n.showSaveDialog(null);
+			if(r==JFileChooser.APPROVE_OPTION)
+			{
+				area.setText(n.getSelectedFile().getAbsolutePath());
+			}
+			else
+			{
+				area.setText("You cancelled the operation");
+			}
+		}
+		else if(action.equals("Member details"))
+		{
+			area.setText("No new details yet");
+		}
+
+	}
+	public static void main(String []args)
+	{
+		colorsSwing obj=new colorsSwing();
+		obj.setVisible(true);
+	}
+
+	
+}
